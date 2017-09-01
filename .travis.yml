@@ -36,12 +36,12 @@ matrix:
     include:
 
         # Do a coverage test in Python 2.
-        - python: 2.7
+        - python: 3.4
           env: SETUP_CMD='coverage'
 
         # Do a egg-info test in Python 2.
-        - python: 2.7
-          env: SETUP_CMD='egg_info'
+        - python: 3.4
+          env: SETUP_CMD='deploy'
 
         # Check for sphinx doc build warnings - we do this first because it
         # may run for a long time
@@ -66,3 +66,18 @@ after_success:
     # below and replace "packagename" with the name of your package.
     # The coveragerc file may be customized as needed for your package.
     - if [[ $SETUP_CMD == 'coverage' ]]; then coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
+
+before_deploy:
+    # do an egg test
+    cd $TRAVIS_TAG; python setup.py egg_info
+    
+deploy:
+  provider: pypi
+  user: Canadian.Astronomy.Data.Centre
+  password:
+    secure: QG7tc9q7IbWO5nH/fFUSuX61mcqp6vIN2GNbMi177+q3BVhamIe8uWXvLFMsmgnCSj8+lA1EUNNiVlODnAao9EMC2iBgs8NRkj46BtEKuB4Rw6MV7ZLFPmR+zuir3JmBjv81eOC+OizZIxz+n7pjusHgNxlLrXt+RfdkVQIwOLq82GfrfMQcMYArgo6ekovsO+GcySqlm0r6omE6d/rKNYgZGHsw9shNsNncLc34igZTRByRj+zNtrmlxxiLMmk4aAA0xCPFgmQxdzl3HSZnfSXPDZM9L5qtEaW8Sfm2PetEWzk8rR1YQYIVNy0T+PjLPtk4++3xMaTttD6fVWYrmN4tlhBlWZRuUS/1NU/NzYJ+jtQ7PUPzedJ8HidHFeI/OqehHaK9J9O1QoPiPgzEzz5BCtwc3M9SneJwcaHJdIp+VMNgq5o/zSQbTlAKgbGaqNabi+GG4QKjvjsD7MegY5dm/T2ZibfACz4hGoSrsmKtYTGwYz0WBdD4okdoZo7a/uKG8gc4vCRoDcg1jh1J7jBDb2tMrQc9Noa8YkRGBlC2BEMGN+EaRtfk9GzkDaFWxKfswQHwQ0313NB4oDmLBdxUawmg/R+YrQnpGMl45Vc9bBDOVBnLTNO6AftFNnPT2Cc8fUlG8V3Xhc2PJLgSUC5436c/E0dpyg8wbbEcxEc= 
+  on:
+    tags: true
+    repo: adriand/cadctools
+    branch: hotfix
+    condition: "$SETUP_CMD = 'deploy'"
