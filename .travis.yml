@@ -54,13 +54,12 @@ matrix:
         #  env: SETUP_CMD='test'
           
 install:
-   - pip install -U pip
+    #- pip install -U pip
      #- for i in $(ls -d */); do cd $i; pip install -r dev_requirements.txt; cd ..; done
      #- pip install coveralls
 
 script:
-   - for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
-   - env
+    #- for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
 
 after_success:
     # If coveralls.io is set up for this package, uncomment the line
