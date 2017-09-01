@@ -89,4 +89,5 @@ deploy:
     condition: "$SETUP_CMD = 'deploy'"
 
 after_deploy:
-    - ls dist
+    - echo $(ls dist)
+    - if [ $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')  = $(pip search caom2== | grep latest | awk '{print $2}') ]; then echo "SUCCESS"; else echo "FAIL" && exit -1 ; fi
