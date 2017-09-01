@@ -55,11 +55,11 @@ matrix:
           
 install:
     - pip install -U pip
-     #- for i in $(ls -d */); do cd $i; pip install -r dev_requirements.txt; cd ..; done
-     #- pip install coveralls
+    - for i in $(ls -d */); do cd $i; pip install -r dev_requirements.txt; cd ..; done
+    - pip install coveralls
 
 script:
-    #- for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
+    - for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
 
 after_success:
     # If coveralls.io is set up for this package, uncomment the line
