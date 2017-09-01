@@ -60,6 +60,7 @@ install:
 
 script:
    - for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
+   - env
 
 after_success:
     # If coveralls.io is set up for this package, uncomment the line
