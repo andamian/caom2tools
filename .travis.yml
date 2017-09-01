@@ -69,7 +69,7 @@ after_success:
 
 before_deploy:
     # do an egg test
-    cd $TRAVIS_TAG; python setup.py egg_info
+    - echo $TRAVIS_TAG; cd $TRAVIS_TAG; python setup.py egg_info
     
 deploy:
   provider: pypi
