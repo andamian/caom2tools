@@ -74,7 +74,7 @@ before_deploy:
     #                    cd $(echo $TRAVIS_TAG | awk -F '-' '{print $1}');
     #                    grep "version = $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')" setup.cfg || echo "Mismatch between the tag version and package version" && exit -1;
     #                    #python setup.py egg_info
-    cd $(echo $TRAVIS_TAG | awk -F '-' '{print $1}');
+    cd $(echo $TRAVIS_TAG | awk -F '==' '{print $1}');
 
 
 deploy:
@@ -90,4 +90,5 @@ deploy:
 
 after_deploy:
     - echo $(ls dist)
-    - if [ $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')  = $(pip search caom2== | grep latest | awk '{print $2}') ]; then echo "SUCCESS"; else echo "FAIL" && exit -1 ; fi
+      #- if [ $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')  = $(pip search caom2== | grep latest | awk '{print $2}') ]; then echo "SUCCESS"; else echo "FAIL" && exit -1 ; fi
+    - pip install $(echo $TRAVIS_TAG)
