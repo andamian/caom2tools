@@ -69,7 +69,7 @@ after_success:
 
 before_deploy:
     # do an egg test
-    - echo $TRAVIS_TAG; cd $TRAVIS_TAG; python setup.py egg_info
+    - echo "Installing " $(echo $TRAVIS_TAG | awk -F '-' '{print $1}'); cd $(echo $TRAVIS_TAG | awk -F '-' '{print $1}'); grep "version = $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')" setup.cfg || exit -1; python setup.py egg_info
     
 deploy:
   provider: pypi
@@ -81,3 +81,6 @@ deploy:
     repo: andamian/caom2tools
     branch: hotfix
     condition: "$SETUP_CMD = 'deploy'"
+
+after_deploy:
+    - ls dist
