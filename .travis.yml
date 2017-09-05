@@ -25,6 +25,7 @@ sudo: false
 
 env:
     global:
+        - secure: MHpBo9IJ/7LOfLKfaHeenHNlMSTp35PogYPb9Z+PqY+BqWw7uVF0KKtJOMio/I/oSsMM9BfoFU6sX7ihE05/vtcL+4DP8pi52UyFCjvSva+5BfxoxOUWYcZmsfbUTu8P5Cat+XSlVroAlbagocObl1NF9nL3NXjk3MxBq4StEl7yMBhwkGt3Nfpl++X8t2CgzhtTYA6x86eXzml5V+IYnXeO7LtglG8o1oJQ0edf+LZtTr7C8C95aeWZYgJP9uZN8aVTB62MoFb3AqNT/+S3HNNk1Az6LnUkWb3znTVTHzf6f8Dh3CCW3qqPy2kGJqNo9o55bI6WKJ+i35dUGSl9kWJ8myH+sU9pkjGDmowkgsEQIeM+A1BNRArEWnlIpCC+2q37DKH+ny2+Pqh5BOz40Yr0HYKJKK9ecJ+JvyjNJPBg8CfHORLC10kb42VO7F8wxEChqjuv/u1Cjj9LjZsL3bFNulG01gNOE7UUeVVyWz7SjK2mNkHLElMlddQgQGacBLqs5PX09SyqwxnsIq1TGFqWtdTeDxkVfQpf6tNbyTRfjdq2pywck3eTx1LRrzgerKh1dCd8ZqUTwo0PNHA/jLQQSRfcxPHSgZYp1tGKPxI8k3dxV0huK+mTTecACz5g5Rqe4B0GGuXU5uL3qybl7EfxhTonlDhsJjQKmlMcikM=
 
         - SETUP_CMD='test'
 
@@ -70,26 +71,14 @@ after_success:
     - if [[ $SETUP_CMD == 'coverage' ]]; then coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
 
 before_deploy:
-    # do an egg test
-    #- echo "Installing " $(echo $TRAVIS_TAG | awk -F '-' '{print $1}');
-    #                    cd $(echo $TRAVIS_TAG | awk -F '-' '{print $1}');
-    #                    grep "version = $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')" setup.cfg || echo "Mismatch between the tag version and package version" && exit -1;
-    #                    #python setup.py egg_info
-    cd $(echo $TRAVIS_TAG | awk -F '==' '{print $1}');
 
 
 deploy:
   provider: script
-  user: Canadian.Astronomy.Data.Centre
-  password:
-    secure: QG7tc9q7IbWO5nH/fFUSuX61mcqp6vIN2GNbMi177+q3BVhamIe8uWXvLFMsmgnCSj8+lA1EUNNiVlODnAao9EMC2iBgs8NRkj46BtEKuB4Rw6MV7ZLFPmR+zuir3JmBjv81eOC+OizZIxz+n7pjusHgNxlLrXt+RfdkVQIwOLq82GfrfMQcMYArgo6ekovsO+GcySqlm0r6omE6d/rKNYgZGHsw9shNsNncLc34igZTRByRj+zNtrmlxxiLMmk4aAA0xCPFgmQxdzl3HSZnfSXPDZM9L5qtEaW8Sfm2PetEWzk8rR1YQYIVNy0T+PjLPtk4++3xMaTttD6fVWYrmN4tlhBlWZRuUS/1NU/NzYJ+jtQ7PUPzedJ8HidHFeI/OqehHaK9J9O1QoPiPgzEzz5BCtwc3M9SneJwcaHJdIp+VMNgq5o/zSQbTlAKgbGaqNabi+GG4QKjvjsD7MegY5dm/T2ZibfACz4hGoSrsmKtYTGwYz0WBdD4okdoZo7a/uKG8gc4vCRoDcg1jh1J7jBDb2tMrQc9Noa8YkRGBlC2BEMGN+EaRtfk9GzkDaFWxKfswQHwQ0313NB4oDmLBdxUawmg/R+YrQnpGMl45Vc9bBDOVBnLTNO6AftFNnPT2Cc8fUlG8V3Xhc2PJLgSUC5436c/E0dpyg8wbbEcxEc= 
+  script: deploy.sh
   on:
     tags: true
     repo: andamian/caom2tools
     branch: hotfix
     condition: "$SETUP_CMD = 'deploy'"
 
-after_deploy:
-    - echo $(ls dist)
-      #- if [ $(echo $TRAVIS_TAG | awk -F '-' '{print $2}')  = $(pip search caom2== | grep latest | awk '{print $2}') ]; then echo "SUCCESS"; else echo "FAIL" && exit -1 ; fi
-    - pip install $(echo $TRAVIS_TAG) && exit; rabish to make after deploy fail
