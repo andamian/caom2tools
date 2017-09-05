@@ -61,6 +61,7 @@ install:
     #- pip install coveralls
 
 script:
+    - ls
     #- for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
 
 after_success:
@@ -68,8 +69,6 @@ after_success:
     # below and replace "packagename" with the name of your package.
     # The coveragerc file may be customized as needed for your package.
     - if [[ $SETUP_CMD == 'coverage' ]]; then coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
-
-before_deploy:
 
 
 deploy:
