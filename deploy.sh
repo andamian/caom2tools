@@ -13,4 +13,4 @@ echo "username = Canadian.Astronomy.Data.Centre" >> .pypirc
 echo "password = ${TWINE_PASSWORD}" >> .pypirc
 echo "Configured .pypirc: "
 less .pypirc
-twine upload --config-file .pypirc dist
+twine upload --config-file .pypirc dist/*
