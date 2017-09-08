@@ -14,3 +14,4 @@ echo "password = ${TWINE_PASSWORD}" >> .pypirc
 echo "Configured .pypirc: "
 less .pypirc
 twine upload --config-file .pypirc dist/*
+return $?
