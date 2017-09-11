@@ -31,7 +31,7 @@ echo "password = ${TWINE_PASSWORD}" >> .pypirc
 echo "Configured .pypirc: "
 
 echo "Publish on pypi"
-twine upload --config-file .pypirc dist/*i || { echo "Errors publishing $TRAVIS_TAG"; exit -1; }
+twine upload --config-file .pypirc dist/* || { echo "Errors publishing $TRAVIS_TAG"; exit -1; }
 
 # check version available
 pip install --upgrade --pre $product==$version || { echo "$TRAVIS_TAG not installed on pypi" ; exit -1 } 
