@@ -70,13 +70,15 @@ after_success:
     # The coveragerc file may be customized as needed for your package.
     - if [[ $SETUP_CMD == 'coverage' ]]; then coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
 
-
-deploy:
-  provider: script
-  script: ./deploy.sh
-  on:
-    tags: true
-    repo: andamian/caom2tools
-    branch: hotfix
-    condition: "$SETUP_CMD = 'deploy'"
+jobs:
+  include:
+    - stage: deploy
+      python: 3.4
+      provider: script
+      script: ./.deploy.sh
+      on:
+        tags: true
+        repo: andamian/caom2tools
+        branch: hotfix
+        # condition: "$SETUP_CMD = 'deploy'"
 
