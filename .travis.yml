@@ -2,11 +2,11 @@ language: python
 
 
 python:
-    #- 2.7
-    #- 3.3
+    - 2.7
+    - 3.3
     - 3.4
-      #- 3.5
-      #- 3.6
+    - 3.5
+    - 3.6
 
 # Setting sudo to false opts in to Travis-CI container-based builds.
 sudo: false
@@ -38,11 +38,7 @@ matrix:
 
         # Do a coverage test in Python 2.
         #- python: 3.4
-        #  env: SETUP_CMD='coverage'
-
-        # Do a egg-info test in Python 2.
-        - python: 3.4
-          env: SETUP_CMD='deploy'
+        env: SETUP_CMD='coverage'
 
         # Check for sphinx doc build warnings - we do this first because it
         # may run for a long time
@@ -57,12 +53,11 @@ matrix:
 install:
     - pip install -U pip
     - pip install twine
-    #- for i in $(ls -d */); do cd $i; pip install -r dev_requirements.txt; cd ..; done
-    #- pip install coveralls
+    - for i in $(ls -d */); do cd $i; pip install -r dev_requirements.txt; cd ..; done
+    - pip install coveralls
 
 script:
-    - ls -al
-    #- for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
+    - for i in $(ls -d */); do cd $i; pytest --cov $i || exit 1; cd ..; done
 
 after_success:
     # If coveralls.io is set up for this package, uncomment the line
