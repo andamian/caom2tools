@@ -74,6 +74,5 @@ jobs:
          script: ./.deploy.sh
          on:
             tags: true
-            repo: andamian/caom2tools
-            branch: hotfix
-            # condition: "$SETUP_CMD = 'deploy'"
+            repo: opencadc/caom2tools
+            branch: master
