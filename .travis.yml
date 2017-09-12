@@ -56,7 +56,8 @@ after_success:
     # If coveralls.io is set up for this package, uncomment the line
     # below and replace "packagename" with the name of your package.
     # The coveragerc file may be customized as needed for your package.
-    - if [[ '$TRAVIS_PYTHON_VERSION' == '3.5' ]]; then coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
+    - echo $TRAVIS_PYTHON_VERSION
+    - if [[ '$TRAVIS_PYTHON_VERSION' == '3.5' ]]; then echo "HERE"; coverage combine $(ls -d */.coverage) || exit 1; coveralls; fi
 
 jobs:
   include:
