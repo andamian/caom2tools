@@ -70,7 +70,7 @@ jobs:
     - stage: deploy
       python: 3.4
       deploy:
-    	 provider: script
+         provider: script
          script: ./.deploy.sh
          on:
             tags: true
