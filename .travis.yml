@@ -61,12 +61,12 @@ after_success:
 
 jobs:
   include:
-    - stage: deploy
+    - stage: publish
       python: 3.4
       deploy:
          provider: script
-         script: ./.deploy.sh
+         script: ./.publish.sh
          on:
             tags: true
-            repo: opencadc/caom2tools
-            branch: master
+            condition: -z $PYPI_PASSWORD
+            branch: hotfix

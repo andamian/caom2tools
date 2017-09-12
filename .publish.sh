@@ -27,7 +27,7 @@ python setup.py clean sdist || { echo "Errors building $product"; exit -1; }
 echo "[pypi]" > .pypirc
 chmod 600 .pypirc
 echo "username = Canadian.Astronomy.Data.Centre" >> .pypirc
-echo "password = ${TWINE_PASSWORD}" >> .pypirc
+echo "password = ${PYPI_PASSWORD}" >> .pypirc
 echo "Configured .pypirc: "
 
 echo "Publish on pypi"
