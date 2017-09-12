@@ -69,14 +69,11 @@ jobs:
   include:
     - stage: deploy
       python: 3.4
-      deploy: &.deploy
-
-.deploy:
-    provider: script
-    script: ./.deploy.sh
-    on:
-        tags: true
-        repo: andamian/caom2tools
-        branch: hotfix
-        # condition: "$SETUP_CMD = 'deploy'"
-
+      deploy:
+    	 provider: script
+         script: ./.deploy.sh
+         on:
+            tags: true
+            repo: andamian/caom2tools
+            branch: hotfix
+            # condition: "$SETUP_CMD = 'deploy'"
