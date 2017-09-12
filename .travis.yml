@@ -69,9 +69,12 @@ jobs:
   include:
     - stage: deploy
       python: 3.4
-      provider: script
-      script: ./.deploy.sh
-      on:
+      deploy: &.deploy
+
+.deploy:
+    provider: script
+    script: ./.deploy.sh
+    on:
         tags: true
         repo: andamian/caom2tools
         branch: hotfix
