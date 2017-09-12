@@ -27,10 +27,7 @@ env:
     global:
         - secure: LM5pr9xbwuf2v/lxUGr8WuHUTVSdaxmTQ1w+0HRcwbGykVISv0BzEUnfjxpTv8n4Cg3Ni2cHUhMsv8yZlXofTH7uCxkJkA6yJpG/7IHhJAKnYYIvaZAVyTEk6CCTc5b+rBgA7Akpcwpn44FIoZ75jEetkcyBsbtDSC/kDGVjWfrUdavkEfuOgGg4GvEllIfq5QDs0HvgE86CLngerH5NgLcfusXVyd/oVDdKiANXLATzEedJRA2IneyDe0t4TwRtlTdDAqFAyExqQuAfbhFWJlOehcR6R0l2fR+/imR2BZrcXQQsHjgyXe0M+4zVa06SZ89aRZBbEC+zQtTFdESLHSFPtGOhz2B9fnb4wQXEqg8qixbFXb3hjrgIdlptYeCZKNmD8F0h2+MYAle54uolivdcIxlSpkUYy9/Iru/vf+0fCddDXVJd2aHvIRJ4yWjJbqPNkaz6MISL+uZHU8doUgyGEn5oMv/Q+Rc0KPwPNIxB8i1UYfsgOHR2t3Un66sTquujiq5GSO9PrvuuxorOTeF/qxba9tQPm/+FeLB0vIrvdKID8kWlBdXolMywtD6yk1PI2Q/w5g8tdFVd50bvC+t8bkHvwHe6HgYAnlODB0qkX0Bd+YBtq/zhh1VCkPD0NUEhSGIzCqEhZX14ShEClF1hV0GEghRHqJ3GFOtcIhE=
 
-        - SETUP_CMD='test'
-
     matrix:
-        # Make sure that egg_info works without dependencies
         - SETUP_CMD='test'
 
 matrix:
