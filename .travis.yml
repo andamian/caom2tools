@@ -65,5 +65,5 @@ jobs:
          script: ./.publish.sh
          on:
             tags: true
-            condition: " -z ${PYPI_PASSWORD+x} "
+            condition: ${PYPI_PASSWORD+x} = x
             branch: hotfix
