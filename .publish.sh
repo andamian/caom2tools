@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # Deploys a Python library or application
 
-product=$(echo $TRAVIS_TAG | awk -F '==' '{print $1}')
-version=$(echo $TRAVIS_TAG | awk -F '==' '{print $2}')
+product=$(echo $TRAVIS_TAG | awk -F '=' '{print $1}')
+version=$(echo $TRAVIS_TAG | awk -F '=' '{print $2}')
 if [ -z "$product" ]; then
     echo "Could not find name of product in TRAVIS_TAG: $TRAVIS_TAG";
     exit -1
